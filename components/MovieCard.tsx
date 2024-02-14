@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     width: "100%",
-    height: 280,
+    minHeight: 290,
+    minWidth: 140,
+    maxHeight: 290,
+    maxWidth: 140,
   },
   cardImage: {
     width: "100%",
@@ -22,10 +25,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     padding: 10,
     fontWeight: "bold",
+    color: "#dedede",
   },
   modalContent: {
     padding: 20,
-    backgroundColor: "white",
+    backgroundColor: "#dedede",
     borderRadius: 10,
   },
   modalDetail: {
@@ -53,12 +57,17 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
           }}
         />
-        <Text style={styles.cardTitle}>{movie.title}</Text>
+        <Text style={styles.cardTitle}>
+          {movie.title.length > 13
+            ? movie.title.substring(0, 13) + "..."
+            : movie.title}
+        </Text>
         <Button
           label="View Details"
           onPress={toggleModal}
           backgroundColor="#db0000"
           color="#dedede"
+          style={{ maxWidth: 130 }}
         />
       </View>
 
@@ -77,7 +86,35 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <Text style={{ fontWeight: "bold" }}>Overview:</Text>{" "}
               {movie.overview}
             </Text>
-            <Button label="Close" onPress={toggleModal} />
+            <Text style={styles.modalDetail}>
+              <Text style={{ fontWeight: "bold" }}>Release Date:</Text>{" "}
+              {movie.release_date}
+            </Text>
+            <Text style={styles.modalDetail}>
+              <Text style={{ fontWeight: "bold" }}>Popularity:</Text>{" "}
+              {movie.popularity}
+            </Text>
+            <Text style={styles.modalDetail}>
+              <Text style={{ fontWeight: "bold" }}>Vote Average:</Text>{" "}
+              {movie.vote_average}
+            </Text>
+            <Text style={styles.modalDetail}>
+              <Text style={{ fontWeight: "bold" }}>Vote Count:</Text>{" "}
+              {movie.vote_count}
+            </Text>
+            <Text style={styles.modalDetail}>
+              <Text style={{ fontWeight: "bold" }}>Original Language:</Text>{" "}
+              {movie.original_language}
+            </Text>
+            <Text style={styles.modalDetail}>
+              <Text style={{ fontWeight: "bold" }}>Original Title:</Text>{" "}
+              {movie.original_title}
+            </Text>
+            <Button
+              label="Close"
+              onPress={toggleModal}
+              backgroundColor="#db0000"
+            />
           </View>
         </ScrollView>
       </Modal>

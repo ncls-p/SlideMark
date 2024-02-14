@@ -1,6 +1,5 @@
 import { fetchMovies } from "@/api/ImdbApi";
 import { IMDBMovie } from "@/class/IMDB";
-import Carousel from "@/components/Carousel";
 import MovieCard from "@/components/MovieCard";
 import React, { useEffect, useState } from "react";
 import { Modal, StyleSheet, View } from "react-native";
@@ -33,7 +32,6 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Carousel data={movies} />{" "}
       <FlatGrid
         itemDimension={130}
         data={movies}
