@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Dimensions } from "react-native";
+import { Dimensions, Image } from "react-native";
 import { Carousel as ReactCarousel, View } from "react-native-ui-lib";
 
 const { width: viewportWidth } = Dimensions.get("window");

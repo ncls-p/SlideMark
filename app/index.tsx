@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, Modal, StyleSheet, View } from "react-native";
-import MovieCard from "@/components/MovieCard";
 import { fetchMovies } from "@/api/ImdbApi";
-import Carousel from "@/components/Carousel";
 import { IMDBMovie } from "@/class/IMDB";
+import Carousel from "@/components/Carousel";
+import MovieCard from "@/components/MovieCard";
+import React, { useEffect, useState } from "react";
+import { Modal, StyleSheet, View } from "react-native";
+import { FlatGrid } from "react-native-super-grid";
+import { Button } from "react-native-ui-lib";
 
 export default function TabOneScreen() {
+  let page = 1;
   const [movies, setMovies] = useState<IMDBMovie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<IMDBMovie | null>(null);
 
+  const fetchMoreMovies = async () => {
+    page = page + 1;
+    const fetchedMovies = await fetchMovies(page);
+    setMovies((prevMovies) => [...prevMovies, ...fetchedMovies]);
+  };
+
   useEffect(() => {
     const initMovies = async () => {
-      const fetchedMovies = await fetchMovies();
+      const fetchedMovies = await fetchMovies(page);
       setMovies(fetchedMovies);
     };
 
@@ -25,12 +34,23 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <Carousel data={movies} />{" "}
-      <FlatList
+      <FlatGrid
+        itemDimension={130}
         data={movies}
         renderItem={renderMovieCard}
         keyExtractor={(item) => item.id.toString()}
-        numColumns={3}
-        columnWrapperStyle={styles.row}
+        onEndReached={fetchMoreMovies}
+        onEndReachedThreshold={0.5} // This means "50% from the end"
+        {...(window.innerWidth > 1500 && {
+          ListFooterComponent: () => (
+            <Button
+              label="Load More"
+              onPress={fetchMoreMovies}
+              backgroundColor="#db0000"
+              style={{ margin: 10 }}
+            />
+          ),
+        })}
       />
       <Modal
         animationType="slide"

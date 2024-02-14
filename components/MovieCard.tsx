@@ -1,6 +1,6 @@
 import { IMDBMovie } from "@/class/IMDB";
 import React, { useState } from "react";
-import { Image, Text, View, StyleSheet, ScrollView } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Button, Modal } from "react-native-ui-lib";
 
 const styles = StyleSheet.create({
