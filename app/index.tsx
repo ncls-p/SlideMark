@@ -29,7 +29,7 @@ export default function TabOneScreen() {
         data={movies}
         renderItem={renderMovieCard}
         keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
+        numColumns={3}
         columnWrapperStyle={styles.row}
       />
       <Modal
@@ -44,6 +44,7 @@ export default function TabOneScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#000000",
     flex: 1,
     paddingTop: 10,
   },

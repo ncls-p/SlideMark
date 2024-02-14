@@ -54,7 +54,12 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           }}
         />
         <Text style={styles.cardTitle}>{movie.title}</Text>
-        <Button label="View Details" onPress={toggleModal} />
+        <Button
+          label="View Details"
+          onPress={toggleModal}
+          backgroundColor="#db0000"
+          color="#dedede"
+        />
       </View>
 
       <Modal
@@ -72,7 +77,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <Text style={{ fontWeight: "bold" }}>Overview:</Text>{" "}
               {movie.overview}
             </Text>
-            {/* Add more movie details as needed */}
             <Button label="Close" onPress={toggleModal} />
           </View>
         </ScrollView>
