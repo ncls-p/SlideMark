@@ -6,6 +6,8 @@ import { Button, Modal } from "react-native-ui-lib";
 const styles = StyleSheet.create({
   card: {
     borderRadius: 8,
+    borderColor: "#red",
+    backgroundColor: "#333",
     overflow: "hidden",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },

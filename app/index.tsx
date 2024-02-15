@@ -1,25 +1,25 @@
 import { fetchMovies } from "@/api/ImdbApi";
 import { IMDBMovie } from "@/class/IMDB";
 import MovieCard from "@/components/MovieCard";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Modal, StyleSheet, View } from "react-native";
 import { FlatGrid } from "react-native-super-grid";
-import { Button } from "react-native-ui-lib";
+import { Button, Text } from "react-native-ui-lib";
 
-export default function TabOneScreen() {
-  let page = 1;
+export default function HomeScreen() {
+  const page = useRef(1);
   const [movies, setMovies] = useState<IMDBMovie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<IMDBMovie | null>(null);
 
   const fetchMoreMovies = async () => {
-    page = page + 1;
-    const fetchedMovies = await fetchMovies(page);
+    page.current = page.current += 1;
+    const fetchedMovies = await fetchMovies(page.current);
     setMovies((prevMovies) => [...prevMovies, ...fetchedMovies]);
   };
 
   useEffect(() => {
     const initMovies = async () => {
-      const fetchedMovies = await fetchMovies(page);
+      const fetchedMovies = await fetchMovies(page.current);
       setMovies(fetchedMovies);
     };
 
@@ -32,6 +32,20 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
+      <Text
+        text10
+        white
+        center
+        style={{
+          borderRadius: 10,
+          borderColor: "white",
+          borderWidth: 1,
+          padding: 10,
+          margin: 10,
+        }}
+      >
+        SlideMark
+      </Text>
       <FlatGrid
         itemDimension={130}
         data={movies}
