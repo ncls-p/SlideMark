@@ -2,8 +2,7 @@ import { IMDBApiResponse, IMDBMovie } from "@/class/IMDB";
 import axios from "axios";
 
 const API_URL = "https://api.themoviedb.org/3";
-const API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlOTg5NWQ3YTcxZjMwMDk4MzIxMGEzYTFhYmI3YWIzMSIsInN1YiI6IjY1YjkxM2M1ZTlkYTY5MDE0OGYyZTdjMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EToHBts-jaaRs7_na4jqylQs-h0DeqwbvxTbRBY26U8";
+const API_KEY = process.env.TMDB_READ_ACCESS_TOKEN;
 
 const imdbApi = axios.create({
   baseURL: API_URL,

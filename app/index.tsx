@@ -52,7 +52,7 @@ export default function HomeScreen() {
         renderItem={renderMovieCard}
         keyExtractor={(item) => item.id.toString()}
         onEndReached={fetchMoreMovies}
-        onEndReachedThreshold={0.5} // This means "50% from the end"
+        onEndReachedThreshold={0.5}
         {...(window.innerWidth > 1500 && {
           ListFooterComponent: () => (
             <Button
